@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import {Route, Routes} from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import CreatePage from "./pages/CreatePage";
+import ConstructorSidebarWrapper from "./components/Sidebar";
+import {Pane} from "evergreen-ui";
+import ChapterGroupPage from "./pages/ChapterGroupPage";
+import {defaultMarine} from "./objects/DefaultMarine";
+import EditPage from "./pages/EditPage";
+import history from "./objects/History"
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Pane className="App" display={"flex"} height={"100vh"}>
+        <ConstructorSidebarWrapper/>
+        <Routes history={history}>
+          <Route path='/' element={<MainPage/>} />
+          <Route path='/create' element={<CreatePage isEdit={false} marineToChange={defaultMarine}/>} />
+          <Route path='/edit' element={<EditPage/>} />
+          <Route path='/chapters/group' element={<ChapterGroupPage/>} />
+        </Routes>
+    </Pane>
   );
 }
 
